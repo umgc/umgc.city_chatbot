@@ -25,17 +25,17 @@ export class AddEditComponent implements OnInit {
         this.id = this.route.snapshot.params['id'];
         this.isAddMode = !this.id;
         
-        // APIKey not required in edit mode
-        const APIKeyValidators = [Validators.minLength(6)];
+        // password not required in edit mode
+        const passwordValidators = [Validators.minLength(6)];
         if (this.isAddMode) {
-            APIKeyValidators.push(Validators.required);
+            passwordValidators.push(Validators.required);
         }
 
         this.form = this.formBuilder.group({
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             username: ['', Validators.required],
-            APIKey: ['', APIKeyValidators]
+            password: ['', passwordValidators]
         });
 
         if (!this.isAddMode) {

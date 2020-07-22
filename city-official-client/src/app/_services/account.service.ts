@@ -16,7 +16,7 @@ export class AccountService {
         private router: Router,
         private http: HttpClient
     ) {
-        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
+        this.userSubject = new BehaviorSubject<User>(JSON.parse(sessionStorage.getItem('user')));
         this.user = this.userSubject.asObservable();
     }
 
@@ -24,11 +24,11 @@ export class AccountService {
         return this.userSubject.value;
     }
 
-    login(username, APIKey) {
-        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, APIKey })
+    login(username, password) {
+        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
+                sessionStorage.setItem('user', JSON.stringify(user));
                 this.userSubject.next(user);
                 return user;
             }));
@@ -36,7 +36,7 @@ export class AccountService {
 
     logout() {
         // remove user from local storage and set current user to null
-        localStorage.removeItem('user');
+        sessionStorage.removeItem('user');
         this.userSubject.next(null);
         this.router.navigate(['/account/login']);
     }
@@ -60,7 +60,7 @@ export class AccountService {
                 if (id == this.userValue.id) {
                     // update local storage
                     const user = { ...this.userValue, ...params };
-                    localStorage.setItem('user', JSON.stringify(user));
+                    sessionStorage.setItem('user', JSON.stringify(user));
 
                     // publish updated user to subscribers
                     this.userSubject.next(user);

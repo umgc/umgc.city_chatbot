@@ -1,6 +1,7 @@
-export interface Zone {
+export class Zone {
+    id: string;
     symbol: string;
-    description: string;
+    details: string;
     url: string;
     outline: number[];
 }

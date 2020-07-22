@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AccountService, AlertService } from '@app/_services';
+import {FakeBackendInterceptor} from '@app/_helpers/fake-backend'
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         this.form = this.formBuilder.group({
             username: ['', Validators.required],
-            APIKey: ['', Validators.required]
+            password: ['', Validators.required]
         });
 
         // get return url from route parameters or default to '/'
@@ -45,7 +46,7 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        this.accountService.login(this.f.username.value, this.f.APIKey.value)
+        this.accountService.login(this.f.username.value, this.f.password.value)
             .pipe(first())
             .subscribe(
                 data => {
@@ -56,4 +57,5 @@ export class LoginComponent implements OnInit {
                     this.loading = false;
                 });
     }
+
 }
