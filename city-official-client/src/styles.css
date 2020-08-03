@@ -1,6 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
 a { cursor: pointer; }
 
+.menu-box {
+    box-sizing: border-box;
+    width: 50%;
+    border: solid 10px;
+    border-color: rgb(73, 83, 95);
+    padding: 5px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.float-left {
+    float: left;
+    width: 50%;
+}
+
+.float-right {
+    float: left;
+    width: 50%;
+}
+
+.map {
+    width: 100%;
+    height: 50vh;
+}
+
 .app-container {
     min-height: 320px;
     overflow: hidden;
@@ -8,11 +37,6 @@ a { cursor: pointer; }
 
 .btn-delete-user {
     width: 40px;
-    text-align: center;
-    box-sizing: content-box;
-}
-
-.menu-button {
     text-align: center;
     box-sizing: content-box;
 }

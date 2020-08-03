@@ -1,0 +1,32 @@
+<h1>Regulations</h1>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Add Regulation</a>
+<p *ngIf="Regulation.length <= 0" class="no-data text-center">There is no regulation added yet!</p>
+<table class="table table-striped" *ngIf="Regulation.length > 0">
+    <thead>
+        <tr>
+            <th style="width: 30%">Code</th>
+            <th style="width: 30%">Regulation Url</th>
+            <th style="width: 30%">Keywords</th>
+            <th style="width: 10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let regulation of Regulation, let i = index">
+            <td>{{regulation.code}}</td>
+            <td>{{regulation.url}}</td>
+            <td>{{regulation.keywords}}</td>
+            <td style="white-space: nowrap">
+                <a [routerLink]="['edit/', regulation._id]" class="btn btn-sm btn-primary mr-1">Edit</a>
+                <button (click)="deleteRegulation(regulation, i)" class="btn btn-sm btn-danger btn-delete-regulation" [disabled]="regulation.isDeleting">
+                    <span *ngIf="regulation.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!regulation.isDeleting">Delete</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="!Regulation">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>

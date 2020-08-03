@@ -1,0 +1,35 @@
+<h1>Zones</h1>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Add Zone</a>
+<!-- No data message -->
+<p *ngIf="Zone.length <= 0" class="no-data text-center">There is no zone added yet!</p>
+<table class="table table-striped" *ngIf="Zone.length > 0">
+    <thead>
+        <tr>
+            <th style="width: 30%">Symbol</th>
+            <th style="width: 30%">Details</th>
+            <th style="width: 30%">Url</th>
+            <th style="width: 30%">Outline</th>
+            <th style="width: 10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let zone of Zone, let i = index">
+            <td>{{zone.symbol}}</td>
+            <td>{{zone.details}}</td>
+            <td>{{zone.url}}</td>
+            <td>{{zone.outline}}</td>
+            <td style="white-space: nowrap">
+                <a routerLink="edit/{{zone._id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+                <button (click)="deleteZone(zone, i)" class="btn btn-sm btn-danger btn-delete-zone" [disabled]="zone.isDeleting">
+                    <span *ngIf="zone.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!zone.isDeleting">Delete</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="!Zone">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -5,12 +5,6 @@ import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
 // array in local storage for registered users
 let users = JSON.parse(localStorage.getItem('users')) || [];
-// array in local storage for registered zones
-let zones = JSON.parse(localStorage.getItem('zones')) || [];
-// array in local storage for registered permits
-let permits = JSON.parse(localStorage.getItem('permits')) || [];
-// array in local storage for registered regulations
-let regulations = JSON.parse(localStorage.getItem('regulations')) || [];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -20,7 +14,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // wrap in delayed observable to simulate server api call
         return of(null)
             .pipe(mergeMap(handleRoute))
-            .pipe(materialize())
+            .pipe(materialize()) // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
             .pipe(delay(500))
             .pipe(dematerialize());
 
@@ -47,9 +41,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // route functions
 
         function authenticate() {
-            const { username, APIKey } = body;
-            const user = users.find(x => x.username === username && x.APIKey === APIKey);
-            if (!user) return error('Username or APIKey is incorrect');
+            const { username, password } = body;
+            const user = users.find(x => x.username === username && x.password === password);
+            if (!user) return error('Username or password is incorrect');
             return ok({
                 id: user.id,
                 username: user.username,
@@ -90,9 +84,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             let params = body;
             let user = users.find(x => x.id === idFromUrl());
 
-            // only update APIKey if entered
-            if (!params.APIKey) {
-                delete params.APIKey;
+            // only update password if entered
+            if (!params.password) {
+                delete params.password;
             }
 
             // update and save user

@@ -6,13 +6,18 @@ import { AuthGuard } from './_helpers';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const usersModule = () => import('./users/users.module').then(x => x.UsersModule);
+const zonesModule = () => import('./zones/zones.module').then(x => x.ZonesModule);
+const permitsModule = () => import('./permits/permits.module').then(x => x.PermitsModule);
+const regsModule = () => import('./regs/regs.module').then(x => x.RegsModule);
+
+
 
 const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard] },
-    { path: 'zones', loadChildren: usersModule, canActivate: [AuthGuard] },
-    { path: 'permits', loadChildren: usersModule, canActivate: [AuthGuard] },
-    { path: 'regulations', loadChildren: usersModule, canActivate: [AuthGuard] },
+    { path: 'zones', loadChildren: zonesModule, canActivate: [AuthGuard] },
+    { path: 'permits', loadChildren: permitsModule, canActivate: [AuthGuard] },
+    { path: 'regs', loadChildren: regsModule, canActivate: [AuthGuard] },
     { path: 'account', loadChildren: accountModule },
 
     // otherwise redirect to home
