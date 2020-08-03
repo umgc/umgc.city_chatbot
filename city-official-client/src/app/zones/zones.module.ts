@@ -3,18 +3,19 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { ZonesRoutingModule } from './zones-routing.module';
-import { AddComponent } from './add.component';
+import { AddEditComponent } from './add-edit.component';
 import { LayoutComponent } from './layout.component';
 import { ListComponent } from './list.component';
-import { EditComponent } from './edit.component';
+import { MapComponent } from './map.component';
 
 
 
 @NgModule({
   declarations: [
-    AddComponent, 
+    AddEditComponent, 
     LayoutComponent, 
-    ListComponent, EditComponent],
+    ListComponent, 
+    MapComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

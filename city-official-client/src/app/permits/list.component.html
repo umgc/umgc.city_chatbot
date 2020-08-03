@@ -1,1 +1,36 @@
-<p>list works!</p>
+<h1>Permits</h1>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Add Permit</a>
+
+<!-- No data message -->
+<p *ngIf="Permit.length <= 0" class="no-data text-center">There is no permit added yet!</p>
+<table class="table table-striped" *ngIf="Permit.length > 0">
+    <thead>
+        <tr>
+            <th style="width: 30%">Code</th>
+            <th style="width: 30%">Permit Url</th>
+            <th style="width: 30%">Application Url</th>
+            <th style="width: 30%">Keywords</th>
+            <th style="width: 10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let permit of Permit, let i = index">
+            <td>{{permit.code}}</td>
+            <td>{{permit.url}}</td>
+            <td>{{permit.applicationUrl}}</td>
+            <td>{{permit.keywords}}</td>
+            <td style="white-space: nowrap">
+                <a [routerLink]="['edit/', permit._id]" class="btn btn-sm btn-primary mr-1">Edit</a>
+                <button (click)="deletePermit(permit, i)" class="btn btn-sm btn-danger btn-delete-permit" [disabled]="permit.isDeleting">
+                    <span *ngIf="permit.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!permit.isDeleting">Delete</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="!Permit">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -9,7 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AppComponent } from './app.component';
 import { AlertComponent } from './_components';
-import { HomeComponent } from './home';
+import { HomeComponent } from './home';import { PermitService, RegulationService, AccountService, ZoneService } from './_services';
+;
 
 @NgModule({
     imports: [
@@ -21,11 +22,15 @@ import { HomeComponent } from './home';
     declarations: [
         AppComponent,
         AlertComponent,
-        HomeComponent
+        HomeComponent,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        AccountService,
+        ZoneService,
+        PermitService,
+        RegulationService,
         // provider used to create fake backend
         fakeBackendProvider
     ],

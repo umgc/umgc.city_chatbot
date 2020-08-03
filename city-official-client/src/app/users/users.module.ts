@@ -19,4 +19,6 @@ import { AddEditComponent } from './add-edit.component';
         UsersRoutingModule
     ]    
 })
-export class UsersModule { }
+export class UsersModule {
+    
+ }

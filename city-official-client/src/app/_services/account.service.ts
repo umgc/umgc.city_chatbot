@@ -1,14 +1,16 @@
 ﻿import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 import { User } from '@app/_models';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
+    baseUri:string = 'http://localhost:4000/api';
+    headers = new HttpHeaders().set('Content-Type', 'application/json');
     private userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
 
@@ -16,7 +18,7 @@ export class AccountService {
         private router: Router,
         private http: HttpClient
     ) {
-        this.userSubject = new BehaviorSubject<User>(JSON.parse(sessionStorage.getItem('user')));
+        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
         this.user = this.userSubject.asObservable();
     }
 
@@ -28,7 +30,7 @@ export class AccountService {
         return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                sessionStorage.setItem('user', JSON.stringify(user));
+                localStorage.setItem('user', JSON.stringify(user));
                 this.userSubject.next(user);
                 return user;
             }));
@@ -36,7 +38,7 @@ export class AccountService {
 
     logout() {
         // remove user from local storage and set current user to null
-        sessionStorage.removeItem('user');
+        localStorage.removeItem('user');
         this.userSubject.next(null);
         this.router.navigate(['/account/login']);
     }
@@ -60,7 +62,7 @@ export class AccountService {
                 if (id == this.userValue.id) {
                     // update local storage
                     const user = { ...this.userValue, ...params };
-                    sessionStorage.setItem('user', JSON.stringify(user));
+                    localStorage.setItem('user', JSON.stringify(user));
 
                     // publish updated user to subscribers
                     this.userSubject.next(user);

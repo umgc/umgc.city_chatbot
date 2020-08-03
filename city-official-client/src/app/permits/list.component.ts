@@ -1,14 +1,34 @@
 import { Component, OnInit } from '@angular/core';
+import { PermitService } from '../_services/permit.service';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html'
+  selector: 'app-permit-list',
+  templateUrl: 'list.component.html',
 })
-export class ListComponent implements OnInit {
 
-  constructor() { }
+export class PermitListComponent implements OnInit {
+  
+  Permit:any = [];
 
-  ngOnInit(): void {
+  constructor(private permitService: PermitService) { 
+    this.readPermit();
+  }
+
+  ngOnInit() {}
+
+  readPermit(){
+    this.permitService.getAll().subscribe((data) => {
+     this.Permit = data;
+    })    
+  }
+
+  deletePermit(permit, index) {
+    if(window.confirm('Are you sure?')) {
+        this.permitService.delete(permit._id).subscribe((data) => {
+          this.Permit.splice(index, 1);
+        }
+      )    
+    }
   }
 
 }

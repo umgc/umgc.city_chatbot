@@ -11,6 +11,7 @@ const permitsModule = () => import('./permits/permits.module').then(x => x.Permi
 const regsModule = () => import('./regs/regs.module').then(x => x.RegsModule);
 
 
+
 const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard] },

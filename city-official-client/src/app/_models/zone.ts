@@ -1,7 +1,9 @@
+import { City } from './city';
+
 export class Zone {
-    id: string;
     symbol: string;
     details: string;
     url: string;
     outline: number[];
+    city: City;
 }
