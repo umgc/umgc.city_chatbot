@@ -4,10 +4,10 @@
         <div class="center">
         <div class="menu-box">
             <div class="center">
-            <h1>Municipality Permit Chatbot</h1>
+            <h1>Municipality Permit </h1>
             </div>
             <div class="center">
-            <h1>Client</h1>
+            <h1>Chatbot Client</h1>
             </div>
         </div>
         </div>
@@ -15,12 +15,28 @@
         <br><br>
             <h2 class="center">Available actions</h2>
             <br>
-            <p class="center"><button [routerLink]="'/users'">View Users</button></p>
-            <p class="center"><button [routerLink]="'/zones'" >View Zones</button></p>
-            <p class="center"><button [routerLink]="'/zones/add'">Add New Zone</button></p>
-            <p class="center"><button [routerLink]="'/permits'" >View Permits</button></p>
-            <p class="center"><button [routerLink]="'/permits/add'">Add New Permit</button></p>
-            <p class="center"><button [routerLink]="'/regs'" >View Regulations</button></p>
-            <p class="center"><button [routerLink]="'/regs/add'">Add New Regulation</button></p>
+            <div class="row" id="center">
+                <div class="column" style="padding: 10px;">
+                    <p class="center"><button [routerLink]="'/users'">View Users</button></p>
+                    <p class="center"><button [routerLink]="'/users/add'">Add New User</button></p>
+                </div>
+                <div class="column" style="padding: 10px;">
+                    <p class="center"><button [routerLink]="'/zones'" >View Zones</button></p>
+                    <p class="center"><button [routerLink]="'/zones/add'">Add New Zone</button></p>
+                </div>
+                <div class="column" style="padding: 10px;">
+                    <p class="center"><button [routerLink]="'/permits'" >View Permits</button></p>
+                    <p class="center"><button [routerLink]="'/permits/add'">Add New Permit</button></p>
+                </div>
+                <div class="column" style="padding: 10px;">
+                    <p class="center"><button [routerLink]="'/regs'" >View Regulations</button></p>
+                    <p class="center"><button [routerLink]="'/regs/add'">Add New Regulation</button></p>
+                </div>
+              </div>
+              <br>
+              <div class="row" id="center">
+                    <p class="center"><button >Submit To Chatbot</button></p>
+              </div>
+              <br>
     </div>
 </div>

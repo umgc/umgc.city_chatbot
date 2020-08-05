@@ -28,12 +28,12 @@ export class RegulationService {
         )
     }
 
-    // Get all employees
+    // Get all regs
     getAll() {
         return this.http.get(`${this.baseUri}/regs`);
     }
 
-    // Get employee
+    // Get regs
     getById(id): Observable<any> {
         let url = `${this.baseUri}/regs/read/${id}`;
         return this.http.get(url, {headers: this.headers}).pipe(
@@ -44,7 +44,7 @@ export class RegulationService {
         )
     }
 
-    // Update employee
+    // Update regs
     update(id, data): Observable<any> {
         let url = `${this.baseUri}/regs/update/${id}`;
         return this.http.put(url, data, { headers: this.headers }).pipe(
@@ -52,7 +52,7 @@ export class RegulationService {
         )
     }
 
-    // Delete employee
+    // Delete regs
     delete(id): Observable<any> {
         let url = `${this.baseUri}/regs/delete/${id}`;
         return this.http.delete(url, { headers: this.headers }).pipe(

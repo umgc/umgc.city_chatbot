@@ -6,7 +6,6 @@ import { ZonesRoutingModule } from './zones-routing.module';
 import { AddEditComponent } from './add-edit.component';
 import { LayoutComponent } from './layout.component';
 import { ListComponent } from './list.component';
-import { MapComponent } from './map.component';
 
 
 
@@ -15,7 +14,7 @@ import { MapComponent } from './map.component';
     AddEditComponent, 
     LayoutComponent, 
     ListComponent, 
-    MapComponent],
+    ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
