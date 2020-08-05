@@ -1,6 +1,4 @@
-﻿import { City } from './city';
-
-export class User {
+﻿export class User {
     id: string;
     username: string;
     password: string;
@@ -9,5 +7,4 @@ export class User {
     email: string;
     apiKey: string;
     token: string;
-    city: City;
 }

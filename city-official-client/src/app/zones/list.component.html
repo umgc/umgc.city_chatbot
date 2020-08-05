@@ -1,4 +1,12 @@
 <h1>Zones</h1>
+<style>
+    table { 
+            table-layout: fixed; 
+            margin-left: auto; 
+            margin-right: auto; 
+        } 
+
+</style>
 <a routerLink="add" class="btn btn-sm btn-success mb-2">Add Zone</a>
 <!-- No data message -->
 <p *ngIf="Zone.length <= 0" class="no-data text-center">There is no zone added yet!</p>
@@ -8,8 +16,9 @@
             <th style="width: 30%">Symbol</th>
             <th style="width: 30%">Details</th>
             <th style="width: 30%">Url</th>
-            <th style="width: 30%">Outline</th>
-            <th style="width: 10%"></th>
+            <th style="width: 30%">Permits & Regulations</th>
+            <th style="width: 35%">Outline</th>
+            <th style="width: 20%"></th>
         </tr>
     </thead>
     <tbody>
@@ -17,7 +26,8 @@
             <td>{{zone.symbol}}</td>
             <td>{{zone.details}}</td>
             <td>{{zone.url}}</td>
-            <td>{{zone.outline}}</td>
+            <td>{{zone.permits}}{{zone.regs}}</td>
+            <td><span style="word-wrap: break-word">{{zone.outline}}</span></td>
             <td style="white-space: nowrap">
                 <a routerLink="edit/{{zone._id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
                 <button (click)="deleteZone(zone, i)" class="btn btn-sm btn-danger btn-delete-zone" [disabled]="zone.isDeleting">

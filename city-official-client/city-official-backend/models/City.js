@@ -3,14 +3,17 @@ const Schema = mongoose.Schema;
 
 // Define collection and schema
 let City = new Schema({
-   name: {
+    apiKey: {
       type: String
-   },
+    },
+    name: {
+      type: String
+    },
    state: {
       type: String
-   }
+   },
 }, {
-   collection: 'cities'
+   collection: 'city'
 })
 
 module.exports = mongoose.model('City', City)

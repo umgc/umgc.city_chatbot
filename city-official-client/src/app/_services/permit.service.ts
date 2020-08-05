@@ -28,12 +28,12 @@ export class PermitService {
         )
     }
 
-    // Get all employees
+    // Get all permits
     getAll() {
         return this.http.get(`${this.baseUri}/permit`);
     }
 
-    // Get employee
+    // Get permits
     getById(id): Observable<any> {
         let url = `${this.baseUri}/permit/read/${id}`;
         return this.http.get(url, {headers: this.headers}).pipe(
@@ -44,7 +44,7 @@ export class PermitService {
         )
     }
 
-    // Update employee
+    // Update permits
     update(id, data): Observable<any> {
         let url = `${this.baseUri}/permit/update/${id}`;
         return this.http.put(url, data, { headers: this.headers }).pipe(
@@ -52,7 +52,7 @@ export class PermitService {
         )
     }
 
-    // Delete employee
+    // Delete permits
     delete(id): Observable<any> {
         let url = `${this.baseUri}/permit/delete/${id}`;
         return this.http.delete(url, { headers: this.headers }).pipe(

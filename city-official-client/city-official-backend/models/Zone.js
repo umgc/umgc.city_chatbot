@@ -15,9 +15,11 @@ let Zone = new Schema({
    outline: {
       type: Array
    },
-   city: {
-      name: String,
-      state: String
+   permit: {
+      type: Array,
+   },
+   regs: {
+      type: Array,
    }
 }, {
    collection: 'zones'
