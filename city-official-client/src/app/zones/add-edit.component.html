@@ -1,7 +1,13 @@
 <h1 *ngIf="isAddMode">Add Zone</h1>
 <h1 *ngIf="!isAddMode">Edit Zone</h1>
 <div class="float-left">
-    <app-map></app-map>
+    <p class="center">Point to point draw tool<p>
+    <link rel="stylesheet" href="https://openlayers.org/en/v6.2.1/css/ol.css" type="text/css">
+    <div id="map" class="map" ></div>
+    <br>
+    <div id="center">
+        <button (click)="clearMap()" class="btn btn-sm btn-danger btn-delete-zone">clear</button>
+    </div>
 </div>
 <div class="float-right">
     <div style="padding: 10px;"> 
@@ -28,12 +34,45 @@
                     <div class="form-group col">
                         <label for="details">Details</label>
                         <input type="text" formControlName="details" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.details.errors }" />
-                        <div *ngIf="submitted && f.details.errors" class="invalid-feedback">
-                            <div *ngIf="f.details.errors.required">Keywords are required</div>
-                        </div>
                     </div>
                 </div>
-            <div class="form-group">
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="permit">Permits</label>
+                        <p *ngIf="Permit.length <= 0" class="no-data text-center">There is no permit added yet!</p>
+                        <table class="table table-striped" *ngIf="Permit.length > 0">
+                            <tbody>
+                                <tr *ngFor="let permit of Permit, let i = index">
+                                    <td>{{permit.code}} <input type="checkbox" [value]="permit.code" (change)="onPermitCheckboxChange($event)"/> </td>
+                                </tr>
+                                <tr *ngIf="!Permit">
+                                    <td colspan="4" class="text-center">
+                                        <span class="spinner-border spinner-border-lg align-center"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="regs">Regulations</label>
+                        <p *ngIf="Regs.length <= 0" class="no-data text-center">There is no regulation added yet!</p>
+                        <table class="table table-striped" *ngIf="Regs.length > 0">
+                            <tbody>
+                                <tr *ngFor="let regs of Regs, let i = index">
+                                    <td>{{regs.code}} <input type="checkbox" [value]="regs.code" (change)="onRegsCheckboxChange($event)"/> </td>
+                                </tr>
+                                <tr *ngIf="!Regs">
+                                    <td colspan="4" class="text-center">
+                                        <span class="spinner-border spinner-border-lg align-center"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            <div class="form-group" id="center">
                 <button [disabled]="loading" class="btn btn-primary" type="submit">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     Save

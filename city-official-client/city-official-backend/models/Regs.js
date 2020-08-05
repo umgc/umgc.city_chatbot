@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Define collection and schema
-let Regulation = new Schema({
+let Regs = new Schema({
     code: {
       type: String
     },
@@ -16,7 +16,7 @@ let Regulation = new Schema({
     type: Array
    }
 }, {
-   collection: 'regulations'
+   collection: 'regs'
 })
 
-module.exports = mongoose.model('Regulation', Regulation)
+module.exports = mongoose.model('Regs', Regs)

@@ -15,6 +15,12 @@ a { cursor: pointer; }
     align-items: center;
 }
 
+#center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .float-left {
     float: left;
     width: 50%;
